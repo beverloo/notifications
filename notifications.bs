@@ -113,8 +113,9 @@ end user.
 
 <p>A <a lt="concept notification">notification</a> has an associated list of
 zero or more <dfn>actions</dfn>. Each action has an associated
-<dfn lt="action title">title</dfn> and <dfn>action name</dfn> and <em>can</em>
-have an associated <dfn>action icon URL</dfn> and
+<dfn lt="action type">type</dfn>, <dfn lt="action title">title</dfn> and
+<dfn>action name</dfn> and <em>can</em> have an associated
+<dfn>action placeholder</dfn>, <dfn>action icon URL</dfn> and
 <dfn>action icon resource</dfn>. Users may activate actions, as alternatives to
 activating the notification itself. The user agent must determine the
 <dfn>maximum number of actions</dfn> supported, within the constraints of the
@@ -667,10 +668,17 @@ enum NotificationDirection {
   "rtl"
 };
 
+enum NotificationActionType {
+  "button",
+  "text"
+};
+
 dictionary NotificationAction {
+  required NotificationActionType type = "button";
   required DOMString action;
   required DOMString title;
   USVString icon;
+  DOMString placeholder;
 };
 
 callback NotificationPermissionCallback = void (NotificationPermission permission);
@@ -896,6 +904,9 @@ attribute's getter must return the result of the following steps:
   <ol>
     <li><p>Let <var>action</var> be a new {{NotificationAction}}.
 
+    <li><p>Set <var>action</var>'s {{NotificationAction/type}} to
+    <var>entry</var>'s <a>action type</a>.
+
     <li><p>Set <var>action</var>'s {{NotificationAction/action}} to
     <var>entry</var>'s <a>action name</a>.
 
@@ -904,6 +915,9 @@ attribute's getter must return the result of the following steps:
 
     <li><p>Set <var>action</var>'s {{NotificationAction/icon}} to
     <var>entry</var>'s <a>action icon URL</a>.
+
+    <li><p>Set <var>action</var>'s {{NotificationAction/placeholder}} to
+    <var>entry</var>'s <a>action placeholder</a>.
 
     <!-- XXX IDL dictionaries are usually returned by value, so don't need to be
          immutable. But FrozenArray reifies the dictionaries to mutable JS
@@ -1028,11 +1042,13 @@ partial interface ServiceWorkerRegistration {
 interface NotificationEvent : ExtendableEvent {
   readonly attribute Notification notification;
   readonly attribute DOMString action;
+  readonly attribute DOMString text;
 };
 
 dictionary NotificationEventInit : ExtendableEventInit {
   required Notification notification;
   DOMString action = "";
+  DOMString text = "";
 };
 
 partial interface ServiceWorkerGlobalScope {
@@ -1117,12 +1133,13 @@ notification</a> of {{Notification}} objects already in existence.
 <hr>
 
 <p>To <dfn>fire a service worker notification event named <var>e</var></dfn>
-given <var>notification</var> and <var>action</var>,
+given <var>notification</var>, <var>action</var> and <var>text</var>,
 <a lt="concept event fire">fire an event named <var>e</var></a> with an
 <a lt="concept event">event</a> using the {{NotificationEvent}} interface whose
 {{NotificationEvent/notification}} attribute is initialized to a new
-{{Notification}} object representing <var>notification</var>, and whose
-{{NotificationEvent/action}} attribute is initialized to <var>action</var>.
+{{Notification}} object representing <var>notification</var>, whose
+{{NotificationEvent/action}} attribute is initialized to <var>action</var> and
+whose {{NotificationEvent/text}} attribute is initialized to <var>text</var>.
 
 <p>The {{NotificationEvent/notification}} attribute's getter must return the
 value it was initialized to.

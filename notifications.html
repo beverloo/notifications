@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-notifications.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Notifications API</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-08-22">22 August 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-09-09">9 September 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -190,7 +190,7 @@ visual priority than the <a data-link-type="dfn" href="#icon-resource">icon reso
 icon, badge, sound, or vibration pattern that is not otherwise accessible to the
 end user. </p>
    <p>A <a data-link-type="dfn" href="#concept-notification">notification</a> has an associated list of
-zero or more <dfn data-dfn-type="dfn" data-noexport="" id="actions">actions<a class="self-link" href="#actions"></a></dfn>. Each action has an associated <dfn data-dfn-type="dfn" data-lt="action title" data-noexport="" id="action-title">title<a class="self-link" href="#action-title"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="action-name">action name<a class="self-link" href="#action-name"></a></dfn> and <em>can</em> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="action-icon-url">action icon URL<a class="self-link" href="#action-icon-url"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="action-icon-resource">action icon resource<a class="self-link" href="#action-icon-resource"></a></dfn>. Users may activate actions, as alternatives to
+zero or more <dfn data-dfn-type="dfn" data-noexport="" id="actions">actions<a class="self-link" href="#actions"></a></dfn>. Each action has an associated <dfn data-dfn-type="dfn" data-lt="action type" data-noexport="" id="action-type">type<a class="self-link" href="#action-type"></a></dfn>, <dfn data-dfn-type="dfn" data-lt="action title" data-noexport="" id="action-title">title<a class="self-link" href="#action-title"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="action-name">action name<a class="self-link" href="#action-name"></a></dfn> and <em>can</em> have an associated <dfn data-dfn-type="dfn" data-noexport="" id="action-placeholder">action placeholder<a class="self-link" href="#action-placeholder"></a></dfn>, <dfn data-dfn-type="dfn" data-noexport="" id="action-icon-url">action icon URL<a class="self-link" href="#action-icon-url"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="action-icon-resource">action icon resource<a class="self-link" href="#action-icon-resource"></a></dfn>. Users may activate actions, as alternatives to
 activating the notification itself. The user agent must determine the <dfn data-dfn-type="dfn" data-noexport="" id="maximum-number-of-actions">maximum number of actions<a class="self-link" href="#maximum-number-of-actions"></a></dfn> supported, within the constraints of the
 notification platform. </p>
    <p class="note" role="note">Since display of actions is platform-dependent, developers are
@@ -558,10 +558,17 @@ or vibrating the device again, unless the <a data-link-type="dfn" href="#renotif
   <dfn class="s idl-code" data-dfn-for="NotificationDirection" data-dfn-type="enum-value" data-export="" data-lt="&quot;rtl&quot;|rtl" id="dom-notificationdirection-rtl">"rtl"<a class="self-link" href="#dom-notificationdirection-rtl"></a></dfn>
 };
 
+<span class="kt">enum</span> <dfn class="nv idl-code" data-dfn-type="enum" data-export="" id="enumdef-notificationactiontype">NotificationActionType<a class="self-link" href="#enumdef-notificationactiontype"></a></dfn> {
+  <dfn class="s idl-code" data-dfn-for="NotificationActionType" data-dfn-type="enum-value" data-export="" data-lt="&quot;button&quot;|button" id="dom-notificationactiontype-button">"button"<a class="self-link" href="#dom-notificationactiontype-button"></a></dfn>,
+  <dfn class="s idl-code" data-dfn-for="NotificationActionType" data-dfn-type="enum-value" data-export="" data-lt="&quot;text&quot;|text" id="dom-notificationactiontype-text">"text"<a class="self-link" href="#dom-notificationactiontype-text"></a></dfn>
+};
+
 <span class="kt">dictionary</span> <dfn class="nv idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-notificationaction">NotificationAction<a class="self-link" href="#dictdef-notificationaction"></a></dfn> {
+  <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="#enumdef-notificationactiontype">NotificationActionType</a> <dfn class="nv idl-code" data-default="&quot;button&quot;" data-dfn-for="NotificationAction" data-dfn-type="dict-member" data-export="" data-type="NotificationActionType " id="dom-notificationaction-type">type<a class="self-link" href="#dom-notificationaction-type"></a></dfn> = "button";
   <span class="kt">required</span> <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="NotificationAction" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-notificationaction-action">action<a class="self-link" href="#dom-notificationaction-action"></a></dfn>;
   <span class="kt">required</span> <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="NotificationAction" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-notificationaction-title">title<a class="self-link" href="#dom-notificationaction-title"></a></dfn>;
   <span class="kt">USVString</span> <dfn class="nv idl-code" data-dfn-for="NotificationAction" data-dfn-type="dict-member" data-export="" data-type="USVString " id="dom-notificationaction-icon">icon<a class="self-link" href="#dom-notificationaction-icon"></a></dfn>;
+  <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="NotificationAction" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-notificationaction-placeholder">placeholder<a class="self-link" href="#dom-notificationaction-placeholder"></a></dfn>;
 };
 
 <span class="kt">callback</span> <dfn class="nv idl-code" data-dfn-type="callback" data-export="" id="callbackdef-notificationpermissioncallback">NotificationPermissionCallback<a class="self-link" href="#callbackdef-notificationpermissioncallback"></a></dfn> = <span class="kt">void</span> (<a class="n" data-link-type="idl-name" href="#enumdef-notificationpermission">NotificationPermission</a> <dfn class="nv idl-code" data-dfn-for="NotificationPermissionCallback" data-dfn-type="argument" data-export="" id="dom-notificationpermissioncallback-permission">permission<a class="self-link" href="#dom-notificationpermissioncallback-permission"></a></dfn>);
@@ -694,11 +701,15 @@ getter must return a <a data-link-type="dfn" href="https://html.spec.whatwg.org/
       <li>
        <p>Let <var>action</var> be a new <code class="idl"><a data-link-type="idl" href="#dictdef-notificationaction">NotificationAction</a></code>. </p>
       <li>
+       <p>Set <var>action</var>’s <code class="idl"><a data-link-type="idl" href="#dom-notificationaction-type">type</a></code> to <var>entry</var>’s <a data-link-type="dfn" href="#action-type">action type</a>. </p>
+      <li>
        <p>Set <var>action</var>’s <code class="idl"><a data-link-type="idl" href="#dom-notificationaction-action">action</a></code> to <var>entry</var>’s <a data-link-type="dfn" href="#action-name">action name</a>. </p>
       <li>
        <p>Set <var>action</var>’s <code class="idl"><a data-link-type="idl" href="#dom-notificationaction-title">title</a></code> to <var>entry</var>’s <a data-link-type="dfn" href="#action-title">title</a>. </p>
       <li>
        <p>Set <var>action</var>’s <code class="idl"><a data-link-type="idl" href="#dom-notificationaction-icon">icon</a></code> to <var>entry</var>’s <a data-link-type="dfn" href="#action-icon-url">action icon URL</a>. </p>
+      <li>
+       <p>Set <var>action</var>’s <code class="idl"><a data-link-type="idl" href="#dom-notificationaction-placeholder">placeholder</a></code> to <var>entry</var>’s <a data-link-type="dfn" href="#action-placeholder">action placeholder</a>. </p>
       <li>
        <p>Call <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-object.freeze">Object.freeze</a> on <var>action</var>, to
     prevent accidental mutation by scripts. </p>
@@ -783,11 +794,13 @@ a similar result could be achieved using the <code class="idl"><a class="idl-cod
 <span class="kt">interface</span> <dfn class="nv idl-code" data-dfn-type="interface" data-export="" id="notificationevent">NotificationEvent<a class="self-link" href="#notificationevent"></a></dfn> : <a class="n" data-link-type="idl-name" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#extendableevent">ExtendableEvent</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#notification">Notification</a> <dfn class="nv idl-code" data-dfn-for="NotificationEvent" data-dfn-type="attribute" data-export="" data-readonly="" data-type="Notification" id="dom-notificationevent-notification">notification<a class="self-link" href="#dom-notificationevent-notification"></a></dfn>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="NotificationEvent" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-notificationevent-action">action<a class="self-link" href="#dom-notificationevent-action"></a></dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="NotificationEvent" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-notificationevent-text">text<a class="self-link" href="#dom-notificationevent-text"></a></dfn>;
 };
 
 <span class="kt">dictionary</span> <dfn class="nv idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-notificationeventinit">NotificationEventInit<a class="self-link" href="#dictdef-notificationeventinit"></a></dfn> : <a class="n" data-link-type="idl-name" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#extendableeventinit">ExtendableEventInit</a> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="#notification">Notification</a> <dfn class="nv idl-code" data-dfn-for="NotificationEventInit" data-dfn-type="dict-member" data-export="" data-type="Notification " id="dom-notificationeventinit-notification">notification<a class="self-link" href="#dom-notificationeventinit-notification"></a></dfn>;
   <span class="kt">DOMString</span> <dfn class="nv idl-code" data-default="&quot;&quot;" data-dfn-for="NotificationEventInit" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-notificationeventinit-action">action<a class="self-link" href="#dom-notificationeventinit-action"></a></dfn> = "";
+  <span class="kt">DOMString</span> <dfn class="nv idl-code" data-default="&quot;&quot;" data-dfn-for="NotificationEventInit" data-dfn-type="dict-member" data-export="" data-type="DOMString " id="dom-notificationeventinit-text">text<a class="self-link" href="#dom-notificationeventinit-text"></a></dfn> = "";
 };
 
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#serviceworkerglobalscope">ServiceWorkerGlobalScope</a> {
@@ -848,7 +861,8 @@ a similar result could be achieved using the <code class="idl"><a class="idl-cod
    <p class="note" role="note">This method returns zero or more new <code class="idl"><a data-link-type="idl" href="#notification">Notification</a></code> objects
 which might represent the same underlying <a data-link-type="dfn" href="#concept-notification"> notification</a> of <code class="idl"><a data-link-type="idl" href="#notification">Notification</a></code> objects already in existence. </p>
    <hr>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fire-a-service-worker-notification-event-named-e">fire a service worker notification event named <var>e</var><a class="self-link" href="#fire-a-service-worker-notification-event-named-e"></a></dfn> given <var>notification</var> and <var>action</var>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event named <var>e</var></a> with an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event">event</a> using the <code class="idl"><a data-link-type="idl" href="#notificationevent">NotificationEvent</a></code> interface whose <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-notification">notification</a></code> attribute is initialized to a new <code class="idl"><a data-link-type="idl" href="#notification">Notification</a></code> object representing <var>notification</var>, and whose <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-action">action</a></code> attribute is initialized to <var>action</var>. </p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="fire-a-service-worker-notification-event-named-e">fire a service worker notification event named <var>e</var><a class="self-link" href="#fire-a-service-worker-notification-event-named-e"></a></dfn> given <var>notification</var>, <var>action</var> and <var>text</var>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event named <var>e</var></a> with an <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event">event</a> using the <code class="idl"><a data-link-type="idl" href="#notificationevent">NotificationEvent</a></code> interface whose <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-notification">notification</a></code> attribute is initialized to a new <code class="idl"><a data-link-type="idl" href="#notification">Notification</a></code> object representing <var>notification</var>, whose <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-action">action</a></code> attribute is initialized to <var>action</var> and
+whose <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-text">text</a></code> attribute is initialized to <var>text</var>. </p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-notification">notification</a></code> attribute’s getter must return the
 value it was initialized to. </p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-notificationevent-action">action</a></code> attribute’s getter must return the value it
@@ -927,6 +941,7 @@ neighboring rights to this work. </p>
    <li><a href="#action-icon-resource">action icon resource</a><span>, in §2</span>
    <li><a href="#action-icon-url">action icon URL</a><span>, in §2</span>
    <li><a href="#action-name">action name</a><span>, in §2</span>
+   <li><a href="#action-placeholder">action placeholder</a><span>, in §2</span>
    <li>
     actions
     <ul>
@@ -935,6 +950,7 @@ neighboring rights to this work. </p>
      <li><a href="#dom-notification-actions">attribute for Notification</a><span>, in §3.4</span>
     </ul>
    <li><a href="#action-title">action title</a><span>, in §2</span>
+   <li><a href="#action-type">action type</a><span>, in §2</span>
    <li><a href="#alert-steps">alert steps</a><span>, in §2.11</span>
    <li><a href="#dom-notificationdirection-auto">"auto"</a><span>, in §3</span>
    <li><a href="#dom-notificationdirection-auto">auto</a><span>, in §3</span>
@@ -953,6 +969,8 @@ neighboring rights to this work. </p>
      <li><a href="#dom-notificationoptions-body">dict-member for NotificationOptions</a><span>, in §3</span>
      <li><a href="#dom-notification-body">attribute for Notification</a><span>, in §3.4</span>
     </ul>
+   <li><a href="#dom-notificationactiontype-button">button</a><span>, in §3</span>
+   <li><a href="#dom-notificationactiontype-button">"button"</a><span>, in §3</span>
    <li><a href="#dom-notification-close">close()</a><span>, in §3.4</span>
    <li><a href="#close-steps">close steps</a><span>, in §2.8</span>
    <li><a href="#concept-direction">concept direction</a><span>, in §2</span>
@@ -1021,6 +1039,7 @@ neighboring rights to this work. </p>
      <li><a href="#dom-notificationeventinit-notification">dict-member for NotificationEventInit</a><span>, in §4</span>
     </ul>
    <li><a href="#dictdef-notificationaction">NotificationAction</a><span>, in §3</span>
+   <li><a href="#enumdef-notificationactiontype">NotificationActionType</a><span>, in §3</span>
    <li><a href="#enumdef-notificationdirection">NotificationDirection</a><span>, in §3</span>
    <li><a href="#notificationevent">NotificationEvent</a><span>, in §4</span>
    <li><a href="#dictdef-notificationeventinit">NotificationEventInit</a><span>, in §4</span>
@@ -1040,6 +1059,7 @@ neighboring rights to this work. </p>
      <li><a href="#dom-notification-permission">attribute for Notification</a><span>, in §3.3</span>
     </ul>
    <li><a href="#persistent-notification">persistent notification</a><span>, in §2</span>
+   <li><a href="#dom-notificationaction-placeholder">placeholder</a><span>, in §3</span>
    <li>
     renotify
     <ul>
@@ -1096,6 +1116,14 @@ neighboring rights to this work. </p>
      <li><a href="#dom-getnotificationoptions-tag">dict-member for GetNotificationOptions</a><span>, in §4</span>
     </ul>
    <li>
+    text
+    <ul>
+     <li><a href="#dom-notificationactiontype-text">enum-value for NotificationActionType</a><span>, in §3</span>
+     <li><a href="#dom-notificationevent-text">attribute for NotificationEvent</a><span>, in §4</span>
+     <li><a href="#dom-notificationeventinit-text">dict-member for NotificationEventInit</a><span>, in §4</span>
+    </ul>
+   <li><a href="#dom-notificationactiontype-text">"text"</a><span>, in §3</span>
+   <li>
     timestamp
     <ul>
      <li><a href="#timestamp">definition of</a><span>, in §2</span>
@@ -1108,6 +1136,7 @@ neighboring rights to this work. </p>
      <li><a href="#dom-notificationaction-title">dict-member for NotificationAction</a><span>, in §3</span>
      <li><a href="#dom-notification-title">attribute for Notification</a><span>, in §3.4</span>
     </ul>
+   <li><a href="#dom-notificationaction-type">type</a><span>, in §3</span>
    <li>
     vibrate
     <ul>
@@ -1202,10 +1231,17 @@ neighboring rights to this work. </p>
   <a class="s" href="#dom-notificationdirection-rtl">"rtl"</a>
 };
 
+<span class="kt">enum</span> <a class="nv" href="#enumdef-notificationactiontype">NotificationActionType</a> {
+  <a class="s" href="#dom-notificationactiontype-button">"button"</a>,
+  <a class="s" href="#dom-notificationactiontype-text">"text"</a>
+};
+
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-notificationaction">NotificationAction</a> {
+  <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="#enumdef-notificationactiontype">NotificationActionType</a> <a class="nv" data-default="&quot;button&quot;" data-type="NotificationActionType " href="#dom-notificationaction-type">type</a> = "button";
   <span class="kt">required</span> <span class="kt">DOMString</span> <a class="nv" data-type="DOMString " href="#dom-notificationaction-action">action</a>;
   <span class="kt">required</span> <span class="kt">DOMString</span> <a class="nv" data-type="DOMString " href="#dom-notificationaction-title">title</a>;
   <span class="kt">USVString</span> <a class="nv" data-type="USVString " href="#dom-notificationaction-icon">icon</a>;
+  <span class="kt">DOMString</span> <a class="nv" data-type="DOMString " href="#dom-notificationaction-placeholder">placeholder</a>;
 };
 
 <span class="kt">callback</span> <a class="nv" href="#callbackdef-notificationpermissioncallback">NotificationPermissionCallback</a> = <span class="kt">void</span> (<a class="n" data-link-type="idl-name" href="#enumdef-notificationpermission">NotificationPermission</a> <a class="nv" href="#dom-notificationpermissioncallback-permission">permission</a>);
@@ -1224,11 +1260,13 @@ neighboring rights to this work. </p>
 <span class="kt">interface</span> <a class="nv" href="#notificationevent">NotificationEvent</a> : <a class="n" data-link-type="idl-name" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#extendableevent">ExtendableEvent</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#notification">Notification</a> <a class="nv" data-readonly="" data-type="Notification" href="#dom-notificationevent-notification">notification</a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv" data-readonly="" data-type="DOMString" href="#dom-notificationevent-action">action</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv" data-readonly="" data-type="DOMString" href="#dom-notificationevent-text">text</a>;
 };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-notificationeventinit">NotificationEventInit</a> : <a class="n" data-link-type="idl-name" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#extendableeventinit">ExtendableEventInit</a> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="#notification">Notification</a> <a class="nv" data-type="Notification " href="#dom-notificationeventinit-notification">notification</a>;
   <span class="kt">DOMString</span> <a class="nv" data-default="&quot;&quot;" data-type="DOMString " href="#dom-notificationeventinit-action">action</a> = "";
+  <span class="kt">DOMString</span> <a class="nv" data-default="&quot;&quot;" data-type="DOMString " href="#dom-notificationeventinit-text">text</a> = "";
 };
 
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#serviceworkerglobalscope">ServiceWorkerGlobalScope</a> {
